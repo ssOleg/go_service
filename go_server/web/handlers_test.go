@@ -1,14 +1,12 @@
 package web
 
 import (
-	"testing"
+	"github.com/go-chi/chi"
+	"github.com/ssOleg/go_service/go_server/storage"
 	"net/http"
 	"net/http/httptest"
-	"github.com/ssOleg/go_service/go_server/storage"
-	"github.com/go-chi/chi"
+	"testing"
 )
-
-
 
 //func baseEndpoint(w http.ResponseWriter, req *http.Request) {
 //	w.WriteHeader(200)
@@ -17,21 +15,18 @@ import (
 
 func TRouter() *chi.Mux {
 	dbStructure := storage.DataBase{ConnectionPoint: "localhost"}
-	webRouter := Router{Storage: dbStructure}
+	webRouter := Router{Storage: &dbStructure}
 	router := GetRouter(webRouter)
 	//router.HandleFunc("/", baseEndpoint)
 
 	return router
 }
 
-
-
 func checkResponseCode(t *testing.T, expected, actual int) {
 	if expected != actual {
 		t.Errorf("Expected response code %d. Got %d\n", expected, actual)
 	}
 }
-
 
 func TestGet(t *testing.T) {
 	request, _ := http.NewRequest("GET", "/", nil)
@@ -44,4 +39,3 @@ func TestGet(t *testing.T) {
 	}
 
 }
-

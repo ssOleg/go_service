@@ -2,15 +2,15 @@ package main
 
 import (
 	"flag"
-	"os"
-	"net/http"
-	"os/signal"
-	"syscall"
-	"log"
-	"strings"
+	"fmt"
 	"github.com/ssOleg/go_service/go_server/storage"
 	"github.com/ssOleg/go_service/go_server/web"
-	"fmt"
+	"log"
+	"net/http"
+	"os"
+	"os/signal"
+	"strings"
+	"syscall"
 )
 
 var port = flag.String("port", "", "port to run the server (Required)")

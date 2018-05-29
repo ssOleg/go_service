@@ -1,19 +1,18 @@
 package web
 
 import (
-	"net/http"
-	"encoding/json"
-	"os"
-	"log"
-	"github.com/go-chi/chi"
 	"context"
+	"encoding/json"
+	"github.com/go-chi/chi"
 	"github.com/ssOleg/go_service/go_server/storage"
+	"log"
+	"net/http"
+	"os"
 )
 
 type Router struct {
-	Storage storage.DBase
-	}
-
+	Storage storage.DBase // Interface
+}
 
 func (router *Router) Ctx(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -44,6 +43,7 @@ func (router *Router) createGifs(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode("Please use correct format")
 		return
 	}
+
 	err = router.Storage.Insert(element)
 	check(err)
 
@@ -53,8 +53,8 @@ func (router *Router) createGifs(w http.ResponseWriter, r *http.Request) {
 // Get an item
 func (router *Router) getGif(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	element, true := ctx.Value("gif").(storage.Element)
-	if !true {
+	element, ok := ctx.Value("gif").(storage.Element)
+	if !ok {
 		http.Error(w, http.StatusText(422), 422)
 		return
 	}
@@ -64,8 +64,8 @@ func (router *Router) getGif(w http.ResponseWriter, r *http.Request) {
 // Delete an item
 func (router *Router) deleteGif(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	element, true := ctx.Value("gif").(storage.Element)
-	if !true {
+	element, ok := ctx.Value("gif").(storage.Element)
+	if !ok {
 		http.Error(w, http.StatusText(422), 422)
 		return
 	}

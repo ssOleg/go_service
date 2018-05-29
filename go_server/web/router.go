@@ -1,11 +1,10 @@
 package web
 
 import (
-	"net/http"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"net/http"
 )
-
 
 func GetRouter(handler Router) *chi.Mux {
 	router := chi.NewRouter()
@@ -32,4 +31,3 @@ func GetRouter(handler Router) *chi.Mux {
 
 	return router
 }
-

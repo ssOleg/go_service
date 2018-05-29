@@ -1,19 +1,18 @@
 package storage
 
 import (
-	"gopkg.in/mgo.v2"
-	"fmt"
-	"os"
-	"io/ioutil"
 	"encoding/json"
-	"log"
+	"fmt"
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+	"io/ioutil"
+	"log"
+	"os"
 )
 
 const (
 	COLLECTION = "gifs"
 )
-
 
 type Element struct {
 	Id    string `bson:"id" json:"id"`
@@ -84,7 +83,7 @@ type DBase interface {
 
 type DataBase struct {
 	ConnectionPoint string
-	Session *mgo.Session
+	Session         *mgo.Session
 }
 
 func (db *DataBase) Connect() (*mgo.Session, error) {
@@ -100,24 +99,24 @@ func (db *DataBase) Connect() (*mgo.Session, error) {
 	return dbSession, err
 }
 
-func (db *DataBase) GetAll() ([]Element, error){
+func (db *DataBase) GetAll() ([]Element, error) {
 	var elements []Element
 	err := db.Session.DB("testDB").C(COLLECTION).Find(bson.M{}).All(&elements)
 	return elements, err
 }
 
-func (db *DataBase) Get(id string) (Element, error){
+func (db *DataBase) Get(id string) (Element, error) {
 	var element Element
 	err := db.Session.DB("testDB").C(COLLECTION).Find(bson.M{"id": id}).One(&element)
 	return element, err
 }
 
-func (db *DataBase) Insert(element Element) error{
+func (db *DataBase) Insert(element Element) error {
 	err := db.Session.DB("testDB").C(COLLECTION).Insert(element)
 	return err
 }
 
-func (db *DataBase) Remove(element Element) error{
+func (db *DataBase) Remove(element Element) error {
 	err := db.Session.DB("testDB").C(COLLECTION).Remove(element)
 	return err
 }
@@ -134,4 +133,3 @@ func check(e error) {
 		os.Exit(1)
 	}
 }
-
