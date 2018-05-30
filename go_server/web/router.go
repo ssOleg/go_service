@@ -6,7 +6,6 @@ import (
 	"github.com/go-chi/chi/middleware"
 )
 
-
 func GetRouter(handler Router) *chi.Mux {
 	router := chi.NewRouter()
 
@@ -32,4 +31,3 @@ func GetRouter(handler Router) *chi.Mux {
 
 	return router
 }
-

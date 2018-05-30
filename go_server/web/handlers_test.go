@@ -8,8 +8,6 @@ import (
 	"github.com/go-chi/chi"
 )
 
-
-
 //func baseEndpoint(w http.ResponseWriter, req *http.Request) {
 //	w.WriteHeader(200)
 //	w.Write([]byte("Hello page"))
@@ -24,14 +22,11 @@ func TRouter() *chi.Mux {
 	return router
 }
 
-
-
 func checkResponseCode(t *testing.T, expected, actual int) {
 	if expected != actual {
 		t.Errorf("Expected response code %d. Got %d\n", expected, actual)
 	}
 }
-
 
 func TestGet(t *testing.T) {
 	request, _ := http.NewRequest("GET", "/", nil)
@@ -44,4 +39,3 @@ func TestGet(t *testing.T) {
 	}
 
 }
-
