@@ -39,3 +39,12 @@ func TestGet(t *testing.T) {
 	}
 
 }
+
+func BenchmarkInitialGet(b *testing.B) {
+	request, _ := http.NewRequest("GET", "/", nil)
+	response := httptest.NewRecorder()
+
+	for i := 0; i < b.N; i++ {
+		TRouter().ServeHTTP(response, request)
+	}
+}
