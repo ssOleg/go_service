@@ -15,7 +15,7 @@ import (
 
 func TRouter() *chi.Mux {
 	dbStructure := storage.DataBase{ConnectionPoint: "localhost"}
-	webRouter := Router{Storage: dbStructure}
+	webRouter := Router{Storage: &dbStructure}
 	router := GetRouter(webRouter)
 	//router.HandleFunc("/", baseEndpoint)
 
@@ -38,4 +38,13 @@ func TestGet(t *testing.T) {
 		t.Errorf("Expected an empty array. Got %s", body)
 	}
 
+}
+
+func BenchmarkInitialGet(b *testing.B) {
+	request, _ := http.NewRequest("GET", "/", nil)
+	response := httptest.NewRecorder()
+
+	for i := 0; i < b.N; i++ {
+		TRouter().ServeHTTP(response, request)
+	}
 }
