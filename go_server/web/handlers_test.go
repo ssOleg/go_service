@@ -1,11 +1,11 @@
 package web
 
 import (
-	"testing"
+	"github.com/go-chi/chi"
+	"github.com/ssOleg/go_service/go_server/storage"
 	"net/http"
 	"net/http/httptest"
-	"github.com/ssOleg/go_service/go_server/storage"
-	"github.com/go-chi/chi"
+	"testing"
 )
 
 //func baseEndpoint(w http.ResponseWriter, req *http.Request) {

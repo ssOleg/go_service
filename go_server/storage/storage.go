@@ -1,13 +1,13 @@
 package storage
 
 import (
-	"gopkg.in/mgo.v2"
-	"fmt"
-	"os"
-	"io/ioutil"
 	"encoding/json"
-	"log"
+	"fmt"
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+	"io/ioutil"
+	"log"
+	"os"
 )
 
 const (
